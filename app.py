@@ -2,10 +2,10 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+profiles = []
+
 @app.route("/", methods=["GET", "POST"])
 def home():
-    profile = None
-
     if request.method == "POST":
         name = request.form.get("name")
         teach_skill = request.form.get("teach_skill")
@@ -17,7 +17,9 @@ def home():
             "learn_skill": learn_skill
         }
 
-    return render_template("index.html", profile=profile)
+        profiles.append(profile)
+
+    return render_template("index.html", profiles=profiles)
 
 if __name__ == "__main__":
     app.run(debug=True)

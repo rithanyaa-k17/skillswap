@@ -32,14 +32,16 @@
         <button type="submit">Create Profile</button>
       </form>
 
-      {% if profile %}
+      {% if profiles %}
+      <h2>Available Skill Profiles</h2>
+
+      {% for profile in profiles %}
       <div class="profile-card">
-        <h2>Profile Created</h2>
         <p><strong>Name:</strong> {{ profile.name }}</p>
         <p><strong>Can Teach:</strong> {{ profile.teach_skill }}</p>
         <p><strong>Wants to Learn:</strong> {{ profile.learn_skill }}</p>
       </div>
-      {% endif %}
+      {% endfor %} {% endif %}
     </div>
   </body>
 </html>
