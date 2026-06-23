@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <h1>Search Skill Profiles</h1>
+  <p>Find people based on the skills they teach or want to learn.</p>
+
+  <form method="GET" class="search-form">
+    <input
+      type="text"
+      name="search"
+      placeholder="Search by skill..."
+      value="{{ search_query }}"
+    />
+    <button type="submit">Search</button>
+  </form>
+
+  {% if profiles %}
+  <h2>Available Skill Profiles</h2>
+
+  {% for profile in profiles %}
+  <div class="profile-card">
+    <p><strong>Name:</strong> {{ profile.name }}</p>
+    <p><strong>Can Teach:</strong> {{ profile.teach_skill }}</p>
+    <p><strong>Wants to Learn:</strong> {{ profile.learn_skill }}</p>
+  </div>
+  {% endfor %} {% else %}
+  <p>No matching profiles found.</p>
+  {% endif %}
+</div>
+{% endblock %}

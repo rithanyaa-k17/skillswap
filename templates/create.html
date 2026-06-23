@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <h1>Create Your Skill Profile</h1>
+  <p>Tell others what you can teach and what you want to learn.</p>
+
+  <form method="POST">
+    <input type="text" name="name" placeholder="Your Name" required />
+
+    <input
+      type="text"
+      name="teach_skill"
+      placeholder="Skill you can teach"
+      required
+    />
+
+    <input
+      type="text"
+      name="learn_skill"
+      placeholder="Skill you want to learn"
+      required
+    />
+
+    <button type="submit">Create Profile</button>
+  </form>
+</div>
+{% endblock %}

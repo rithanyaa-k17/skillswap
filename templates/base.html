@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SkillSwap</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <h2>SkillSwap</h2>
+      <div>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('create_profile') }}">Create Profile</a>
+        <a href="{{ url_for('search_profiles') }}">Search Skills</a>
+      </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

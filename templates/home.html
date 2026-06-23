@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block content %}
+<div class="hero">
+  <h1>Learn What You Need. Teach What You Know.</h1>
+  <p>
+    SkillSwap connects learners with peers who can teach skills, exchange
+    knowledge, and grow together.
+  </p>
+
+  <div class="hero-buttons">
+    <a href="{{ url_for('create_profile') }}" class="btn">Create Profile</a>
+    <a href="{{ url_for('search_profiles') }}" class="btn secondary"
+      >Explore Skills</a
+    >
+  </div>
+</div>
+{% endblock %}
