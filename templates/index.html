@@ -12,7 +12,34 @@
       <h1>SkillSwap</h1>
       <p>Find peers to teach, learn, and grow together.</p>
 
-      <button>Get Started</button>
+      <form method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+
+        <input
+          type="text"
+          name="teach_skill"
+          placeholder="Skill you can teach"
+          required
+        />
+
+        <input
+          type="text"
+          name="learn_skill"
+          placeholder="Skill you want to learn"
+          required
+        />
+
+        <button type="submit">Create Profile</button>
+      </form>
+
+      {% if profile %}
+      <div class="profile-card">
+        <h2>Profile Created</h2>
+        <p><strong>Name:</strong> {{ profile.name }}</p>
+        <p><strong>Can Teach:</strong> {{ profile.teach_skill }}</p>
+        <p><strong>Wants to Learn:</strong> {{ profile.learn_skill }}</p>
+      </div>
+      {% endif %}
     </div>
   </body>
 </html>
