@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <h1>SkillSwap Requests</h1>
+  <p>View all learning requests sent by users.</p>
+
+  {% if requests %} {% for request in requests %}
+  <div class="profile-card">
+    <p><strong>Requester:</strong> {{ request.requester_name }}</p>
+    <p><strong>Request To:</strong> {{ request.profile_name }}</p>
+    <p><strong>Skill Offered by Profile:</strong> {{ request.teach_skill }}</p>
+    <p><strong>Message:</strong> {{ request.message }}</p>
+    <p><strong>Status:</strong> {{ request.status }}</p>
+  </div>
+  {% endfor %} {% else %}
+  <p>No requests found yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

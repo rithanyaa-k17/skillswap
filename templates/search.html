@@ -21,6 +21,9 @@
     <p><strong>Name:</strong> {{ profile.name }}</p>
     <p><strong>Can Teach:</strong> {{ profile.teach_skill }}</p>
     <p><strong>Wants to Learn:</strong> {{ profile.learn_skill }}</p>
+    <a href="{{ url_for('send_request', profile_id=profile.id) }}" class="btn">
+      Send Request
+    </a>
   </div>
   {% endfor %} {% else %}
   <p>No matching profiles found.</p>

@@ -104,3 +104,21 @@ button {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+textarea {
+  display: block;
+  width: 300px;
+  height: 100px;
+  padding: 12px;
+  margin: 12px auto;
+  font-size: 16px;
+  resize: vertical;
+}
+.error-message {
+  color: #b00020;
+  background-color: #ffe6e6;
+  padding: 12px;
+  width: 350px;
+  margin: 15px auto;
+  border-radius: 8px;
+  font-weight: bold;
+}

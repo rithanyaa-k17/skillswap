@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <h1>Send SkillSwap Request</h1>
+
+  <div class="profile-card">
+    <p><strong>To:</strong> {{ profile.name }}</p>
+    <p><strong>Can Teach:</strong> {{ profile.teach_skill }}</p>
+    <p><strong>Wants to Learn:</strong> {{ profile.learn_skill }}</p>
+  </div>
+  {% if error %}
+  <p class="error-message">{{ error }}</p>
+  {% endif %}
+  <form method="POST">
+    <input type="text" name="requester_name" placeholder="Your Name" required />
+
+    <textarea
+      name="message"
+      placeholder="Write a short message..."
+      required
+    ></textarea>
+
+    <button type="submit">Send Request</button>
+  </form>
+</div>
+{% endblock %}
