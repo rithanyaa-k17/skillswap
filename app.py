@@ -145,5 +145,41 @@ def update_request_status(request_id, new_status):
 
     return redirect(url_for("view_requests"))
 
+@app.route("/dashboard")
+def dashboard():
+    conn = get_db_connection()
+
+    total_profiles = conn.execute(
+        "SELECT COUNT(*) FROM profiles"
+    ).fetchone()[0]
+
+    total_requests = conn.execute(
+        "SELECT COUNT(*) FROM requests"
+    ).fetchone()[0]
+
+    pending_requests = conn.execute(
+        "SELECT COUNT(*) FROM requests WHERE status = 'Pending'"
+    ).fetchone()[0]
+
+    accepted_requests = conn.execute(
+        "SELECT COUNT(*) FROM requests WHERE status = 'Accepted'"
+    ).fetchone()[0]
+
+    rejected_requests = conn.execute(
+        "SELECT COUNT(*) FROM requests WHERE status = 'Rejected'"
+    ).fetchone()[0]
+
+    conn.close()
+
+    stats = {
+        "total_profiles": total_profiles,
+        "total_requests": total_requests,
+        "pending_requests": pending_requests,
+        "accepted_requests": accepted_requests,
+        "rejected_requests": rejected_requests
+    }
+
+    return render_template("dashboard.html", stats=stats)
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <h1>SkillSwap Dashboard</h1>
+  <p>Track overall activity on the SkillSwap platform.</p>
+
+  <div class="dashboard-grid">
+    <div class="stat-card">
+      <h2>{{ stats.total_profiles }}</h2>
+      <p>Total Profiles</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ stats.total_requests }}</h2>
+      <p>Total Requests</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ stats.pending_requests }}</h2>
+      <p>Pending Requests</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ stats.accepted_requests }}</h2>
+      <p>Accepted Requests</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ stats.rejected_requests }}</h2>
+      <p>Rejected Requests</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
