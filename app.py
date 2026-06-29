@@ -128,5 +128,22 @@ def view_requests():
 
     return render_template("requests.html", requests=requests)
 
+@app.route("/requests/<int:request_id>/<new_status>", methods=["POST"])
+def update_request_status(request_id, new_status):
+    if new_status not in ["Accepted", "Rejected"]:
+        return redirect(url_for("view_requests"))
+
+    conn = get_db_connection()
+
+    conn.execute(
+        "UPDATE requests SET status = ? WHERE id = ?",
+        (new_status, request_id)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("view_requests"))
+
 if __name__ == "__main__":
     app.run(debug=True)

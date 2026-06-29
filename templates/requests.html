@@ -9,7 +9,30 @@
     <p><strong>Request To:</strong> {{ request.profile_name }}</p>
     <p><strong>Skill Offered by Profile:</strong> {{ request.teach_skill }}</p>
     <p><strong>Message:</strong> {{ request.message }}</p>
-    <p><strong>Status:</strong> {{ request.status }}</p>
+    <p>
+      <strong>Status:</strong>
+      <span class="status {{ request.status|lower }}">
+        {{ request.status }}
+      </span>
+    </p>
+
+    {% if request.status == "Pending" %}
+    <form
+      method="POST"
+      action="{{ url_for('update_request_status', request_id=request.id, new_status='Accepted') }}"
+      class="inline-form"
+    >
+      <button type="submit" class="accept-btn">Accept</button>
+    </form>
+
+    <form
+      method="POST"
+      action="{{ url_for('update_request_status', request_id=request.id, new_status='Rejected') }}"
+      class="inline-form"
+    >
+      <button type="submit" class="reject-btn">Reject</button>
+    </form>
+    {% endif %}
   </div>
   {% endfor %} {% else %}
   <p>No requests found yet.</p>
