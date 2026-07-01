@@ -28,6 +28,35 @@
       <h2>{{ stats.rejected_requests }}</h2>
       <p>Rejected Requests</p>
     </div>
+    <div class="skill-popularity-section">
+      <div class="popularity-card">
+        <h2>Most Taught Skills</h2>
+
+        {% if most_taught_skills %} {% for skill in most_taught_skills %}
+        <p>
+          <strong>{{ skill.teach_skill }}</strong>
+          — {{ skill.count }} {{ "profile" if skill.count == 1 else "profiles"
+          }}
+        </p>
+        {% endfor %} {% else %}
+        <p>No taught skills available yet.</p>
+        {% endif %}
+      </div>
+
+      <div class="popularity-card">
+        <h2>Most Wanted Skills</h2>
+
+        {% if most_wanted_skills %} {% for skill in most_wanted_skills %}
+        <p>
+          <strong>{{ skill.learn_skill }}</strong>
+          — {{ skill.count }} {{ "profile" if skill.count == 1 else "profiles"
+          }}
+        </p>
+        {% endfor %} {% else %}
+        <p>No wanted skills available yet.</p>
+        {% endif %}
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

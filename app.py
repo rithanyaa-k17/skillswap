@@ -190,6 +190,21 @@ def dashboard():
         "SELECT COUNT(*) FROM requests WHERE status = 'Rejected'"
     ).fetchone()[0]
 
+    most_taught_skills = conn.execute("""
+    SELECT teach_skill, COUNT(*) AS count
+    FROM profiles
+    GROUP BY LOWER(teach_skill)
+    ORDER BY count DESC
+    LIMIT 5
+""").fetchall()
+
+    most_wanted_skills = conn.execute("""
+    SELECT learn_skill, COUNT(*) AS count
+    FROM profiles
+    GROUP BY LOWER(learn_skill)
+    ORDER BY count DESC
+    LIMIT 5
+""").fetchall()
     conn.close()
 
     stats = {
@@ -200,8 +215,12 @@ def dashboard():
         "rejected_requests": rejected_requests
     }
 
-    return render_template("dashboard.html", stats=stats)
-
+    return render_template(
+    "dashboard.html",
+    stats=stats,
+    most_taught_skills=most_taught_skills,
+    most_wanted_skills=most_wanted_skills
+)
 @app.route("/matches")
 def smart_matches():
     conn = get_db_connection()

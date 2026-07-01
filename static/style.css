@@ -202,3 +202,29 @@ textarea {
 .filter-btn:hover {
   background-color: #555;
 }
+.skill-popularity-section {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 45px;
+}
+
+.popularity-card {
+  background-color: white;
+  width: 330px;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.popularity-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.popularity-card p {
+  font-size: 16px;
+  color: #444;
+}
