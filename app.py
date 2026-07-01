@@ -243,5 +243,27 @@ def smart_matches():
 
     return render_template("matches.html", matches=matches)
 
+@app.route("/profile/<int:profile_id>")
+def profile_detail(profile_id):
+    conn = get_db_connection()
+
+    profile = conn.execute(
+        "SELECT * FROM profiles WHERE id = ?",
+        (profile_id,)
+    ).fetchone()
+
+    request_count = conn.execute(
+        "SELECT COUNT(*) FROM requests WHERE profile_id = ?",
+        (profile_id,)
+    ).fetchone()[0]
+
+    conn.close()
+
+    return render_template(
+        "profile_detail.html",
+        profile=profile,
+        request_count=request_count
+    )
+
 if __name__ == "__main__":
     app.run(debug=True)

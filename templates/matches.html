@@ -13,7 +13,12 @@
       <strong>{{ match.teacher_name }}</strong> can teach
       <strong>{{ match.skill_offered }}</strong>
     </p>
-
+    <a
+      href="{{ url_for('profile_detail', profile_id=match.teacher_id) }}"
+      class="btn secondary"
+    >
+      View Profile
+    </a>
     <a
       href="{{ url_for('send_request', profile_id=match.teacher_id) }}"
       class="btn"
