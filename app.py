@@ -109,24 +109,45 @@ def send_request(profile_id):
 
 @app.route("/requests")
 def view_requests():
+    status_filter = request.args.get("status", "All")
+
     conn = get_db_connection()
 
-    requests = conn.execute("""
-        SELECT 
-            requests.id,
-            requests.requester_name,
-            requests.message,
-            requests.status,
-            profiles.name AS profile_name,
-            profiles.teach_skill,
-            profiles.learn_skill
-        FROM requests
-        JOIN profiles ON requests.profile_id = profiles.id
-    """).fetchall()
+    if status_filter == "All":
+        requests = conn.execute("""
+            SELECT 
+                requests.id,
+                requests.requester_name,
+                requests.message,
+                requests.status,
+                profiles.name AS profile_name,
+                profiles.teach_skill,
+                profiles.learn_skill
+            FROM requests
+            JOIN profiles ON requests.profile_id = profiles.id
+        """).fetchall()
+    else:
+        requests = conn.execute("""
+            SELECT 
+                requests.id,
+                requests.requester_name,
+                requests.message,
+                requests.status,
+                profiles.name AS profile_name,
+                profiles.teach_skill,
+                profiles.learn_skill
+            FROM requests
+            JOIN profiles ON requests.profile_id = profiles.id
+            WHERE requests.status = ?
+        """, (status_filter,)).fetchall()
 
     conn.close()
 
-    return render_template("requests.html", requests=requests)
+    return render_template(
+        "requests.html",
+        requests=requests,
+        status_filter=status_filter
+    )
 
 @app.route("/requests/<int:request_id>/<new_status>", methods=["POST"])
 def update_request_status(request_id, new_status):
@@ -180,6 +201,28 @@ def dashboard():
     }
 
     return render_template("dashboard.html", stats=stats)
+
+@app.route("/matches")
+def smart_matches():
+    conn = get_db_connection()
+
+    matches = conn.execute("""
+        SELECT
+            learner.id AS learner_id,
+            learner.name AS learner_name,
+            learner.learn_skill AS skill_needed,
+            teacher.id AS teacher_id,
+            teacher.name AS teacher_name,
+            teacher.teach_skill AS skill_offered
+        FROM profiles learner
+        JOIN profiles teacher
+        ON LOWER(learner.learn_skill) = LOWER(teacher.teach_skill)
+        WHERE learner.id != teacher.id
+    """).fetchall()
+
+    conn.close()
+
+    return render_template("matches.html", matches=matches)
 
 if __name__ == "__main__":
     app.run(debug=True)

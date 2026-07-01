@@ -2,7 +2,28 @@
 <div class="container">
   <h1>SkillSwap Requests</h1>
   <p>View all learning requests sent by users.</p>
+  <div class="filter-buttons">
+    <a href="{{ url_for('view_requests', status='All') }}" class="filter-btn"
+      >All</a
+    >
+    <a
+      href="{{ url_for('view_requests', status='Pending') }}"
+      class="filter-btn"
+      >Pending</a
+    >
+    <a
+      href="{{ url_for('view_requests', status='Accepted') }}"
+      class="filter-btn"
+      >Accepted</a
+    >
+    <a
+      href="{{ url_for('view_requests', status='Rejected') }}"
+      class="filter-btn"
+      >Rejected</a
+    >
+  </div>
 
+  <p><strong>Current Filter:</strong> {{ status_filter }}</p>
   {% if requests %} {% for request in requests %}
   <div class="profile-card">
     <p><strong>Requester:</strong> {{ request.requester_name }}</p>
